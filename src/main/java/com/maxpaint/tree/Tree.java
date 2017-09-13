@@ -2,9 +2,9 @@ package com.maxpaint.tree;
 
 public abstract class Tree implements Comparable<Tree> {
 
-    protected final Integer frequency; // the frequency of this tree
+    protected final int frequency; // the frequency of this tree
 
-    public Tree(Integer freq) {
+    public Tree(int freq) {
         this.frequency = freq;
     }
 
@@ -12,5 +12,9 @@ public abstract class Tree implements Comparable<Tree> {
         return frequency - tree.frequency;
     }
 
+    public int getFrequency() {
+        return frequency;
+    }
 
+    public abstract String getValue();
 }

@@ -9,4 +9,9 @@ public class TreeNode extends Tree {
         left = l;
         right = r;
     }
+
+    @Override
+    public String getValue() {
+        return null;
+    }
 }

@@ -6,6 +6,7 @@ import com.maxpaint.tree.TreeNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,11 +21,16 @@ public class StringTreeConverter {
     private PriorityQueue<Tree> sortedTrees = new PriorityQueue<>();
 
     public StringTreeConverter(String filePath) throws IOException {
-        this.tree = buildTree(getStringCounts(filePath));
+        Path path = new File(filePath).toPath();
+        this.tree = buildTree(getStringCounts(path));
     }
 
-    private Map<String, Integer> getStringCounts(String filePath) throws IOException {
-        List<String> lines = readAllLines(new File(filePath).toPath());
+    public StringTreeConverter(File file) throws IOException {
+        this.tree = buildTree(getStringCounts(file.toPath()));
+    }
+
+    private Map<String, Integer> getStringCounts(Path path) throws IOException {
+        List<String> lines = readAllLines(path);
         Map<String, Integer> counts = new HashMap<>();
         lines.stream()
                 .flatMap(line -> stream(line.split(" ")))
@@ -50,12 +56,16 @@ public class StringTreeConverter {
 
     public void print() {
         System.out.println(" value -> frequency");
-        while (sortedTrees.size() > 1) {
+        while (sortedTrees.size() > 0) {
             System.out.println(sortedTrees.poll());
         }
     }
 
     public Tree getTree() {
         return tree;
+    }
+
+    public PriorityQueue<Tree> getSortedTrees() {
+        return sortedTrees;
     }
 }

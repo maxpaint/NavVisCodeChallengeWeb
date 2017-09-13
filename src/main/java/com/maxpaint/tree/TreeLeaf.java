@@ -15,4 +15,8 @@ public class TreeLeaf extends Tree {
         sb.append(value).append(" -> ").append(frequency);
         return sb.toString();
     }
+
+    public String getValue() {
+        return value;
+    }
 }
